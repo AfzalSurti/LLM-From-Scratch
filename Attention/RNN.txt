@@ -1,0 +1,45 @@
+RNN, Attention, and Transformer — Clean Explanation
+
+1. RNN (Encoder–Decoder Model)
+- An RNN-based sequence-to-sequence model has two main parts:
+  - Encoder
+  - Decoder
+- The encoder processes the input sequence step by step.
+- At each step, it updates a hidden state that stores information seen so far.
+- After reading the entire input, the encoder outputs only the final hidden state.
+- This final hidden state is passed to the decoder.
+
+2. Problem with Basic RNN Encoder–Decoder
+- The decoder has access to only the last hidden state of the encoder.
+- This creates an information bottleneck.
+- For long sequences, important early information may be lost.
+- The decoder cannot directly access earlier encoder hidden states.
+- As a result, context is weak and performance degrades on long inputs.
+
+3. Bahdanau Attention (Additive Attention)
+- To solve this problem, researchers introduced Bahdanau attention.
+- The encoder now stores all hidden states (one per input step).
+- At each decoding step:
+  - The decoder compares its current state with all encoder hidden states.
+  - Attention weights are computed to measure importance.
+- A context vector is formed as a weighted sum of encoder hidden states.
+- This allows the decoder to:
+  - Focus on selective parts of the input
+  - Retain important details when generating each output token
+
+4. Transformer and Self-Attention
+- The Transformer architecture was later introduced.
+- It is inspired by attention mechanisms, including Bahdanau attention.
+- The key idea is self-attention:
+  - Each token attends to all other tokens in the same sequence.
+- Transformers remove recurrence and process tokens in parallel.
+- Benefits:
+  - Better capture of long-range dependencies
+  - Faster training due to parallelization
+  - Stronger contextual understanding
+
+5. Overall Flow
+- RNN → sequential processing, context bottleneck
+- Bahdanau Attention → selective access to encoder states
+- Transformer → full self-attention without RNNs
+- Modern LLMs are built on Transformer + self-attention
